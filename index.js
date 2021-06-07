@@ -10,7 +10,7 @@ const router = express.Router();
 app.use('/api', router);
 let productos = []
 
-app.get('/api/productos/listar', (req, res) => {
+router.get('/productos/listar', (req, res) => {
 
     async function read(ruta) {
         try {
