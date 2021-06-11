@@ -9,6 +9,7 @@ app.use(express.static('public'));
 const router = express.Router();
 app.use('/api', router);
 let productos = []
+//productos = fs.readFileSync(ruta, 'utf-8')
 
 router.get('/productos/listar', (req, res) => {
 
@@ -67,10 +68,11 @@ router.put('/productos/:id', (req,res)=>{
     if(!producto){
         res.sendStatus(404)
     }
-    const {name} = req.body
-    const {price} = req.body
-    producto.nombre = name
-    producto.precio = price
+    const {name} = req.body;
+    const {price} = req.body;
+    const {thumbnail} = req.body;
+    producto.name = name
+    producto.price = price
     res.sendStatus(204)
 })
 

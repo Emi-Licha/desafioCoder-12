@@ -1,8 +1,14 @@
 [
   {
     "id": 1,
-    "name": "Macbook",
-    "price": "20.30",
-    "thumbnail": "link"
+    "name": "mac",
+    "price": 1900.5,
+    "thumbnail": "link4"
+  },
+  {
+    "id": 2,
+    "name": "mac",
+    "price": 1900.5,
+    "thumbnail": "link4"
   }
 ]
