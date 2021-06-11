@@ -71,6 +71,7 @@ router.put('/productos/:id', (req,res)=>{
     const {name} = req.body;
     const {price} = req.body;
     const {thumbnail} = req.body;
+    producto.thumbnail = thumbnail;
     producto.name = name
     producto.price = price
     res.sendStatus(204)
