@@ -1,15 +1,16 @@
-const express = require('express')
+import express from 'express';
 const app = express();
-const fs = require('fs');
+import fs from 'fs';
 const puerto = 8080;
 const ruta = "./productos.txt";
+import Productos from './api/productos.js';
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static('public'));
 const router = express.Router();
 app.use('/api', router);
-let productos = []
-//productos = fs.readFileSync(ruta, 'utf-8')
+let productos = new Productos;
+
 
 router.get('/productos/listar', (req, res) => {
 
@@ -36,7 +37,7 @@ router.post('/productos', (req, res) => {
        
     }
     
-    productos.push(producto)
+    productos.guardar(producto)
     let data = JSON.stringify(productos,null,2);
     fs.writeFileSync(ruta, data, 'utf-8')
     
@@ -53,28 +54,22 @@ router.get('/productos/listar/:id', (req,res) =>{
 })
 
 router.delete('/productos/:id', (req,res)=>{
-    const id = req.params.id
-    const producto = productos.find(producto => producto.id == id)
+    let { id } = req.params
+    let producto = productos.borrar(id)
     if(!producto){
-        res.status(404).send('El producto que usted intenta eliminar ya no existe')
-    }else{
-    productos = productos.filter( producto => producto.id != id)
-    res.status(200).send('El producto ha sido eliminado') }
+        res.send('el producto que usted intenta borrar no existe!')
+    }
+    res.send(`El producto ha sido eliminado con exito!`);
     
 })
-router.put('/productos/:id', (req,res)=>{
-    const id = req.params.id
-    const producto = productos.find(producto => producto.id === id)
+router.put('/productos/actualizar/:id', (req,res) => {
+    let { id } = req.params
+    let producto = req.body
     if(!producto){
-        res.sendStatus(404)
+        res.send('No se ha encontrado ningun producto con ese id!')
     }
-    const {name} = req.body;
-    const {price} = req.body;
-    const {thumbnail} = req.body;
-    producto.thumbnail = thumbnail;
-    producto.name = name
-    producto.price = price
-    res.sendStatus(204)
+    productos.actualizar(producto,id)
+    res.json(producto)
 })
 
 app.listen(puerto, ()=>{

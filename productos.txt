@@ -1,14 +1,23 @@
-[
-  {
-    "id": 1,
-    "name": "mac",
-    "price": 1900.5,
-    "thumbnail": "link4"
-  },
-  {
-    "id": 2,
-    "name": "mac",
-    "price": 1900.5,
-    "thumbnail": "link4"
-  }
-]
+{
+  "productos": [
+    {
+      "id": 1,
+      "name": "macopa",
+      "price": 19200.5,
+      "thumbnail": "link44"
+    },
+    {
+      "id": 2,
+      "name": "macopa",
+      "price": 19200.5,
+      "thumbnail": "link44"
+    },
+    {
+      "id": 3,
+      "name": "macopa",
+      "price": 19200.5,
+      "thumbnail": "link44"
+    }
+  ],
+  "id": 3
+}
