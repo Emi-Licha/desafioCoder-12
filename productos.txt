@@ -2,22 +2,17 @@
   "productos": [
     {
       "id": 1,
-      "name": "macopa",
-      "price": 19200.5,
-      "thumbnail": "link44"
+      "name": "Macbook",
+      "price": "2340.30",
+      "thumbnail": "link1"
     },
     {
       "id": 2,
-      "name": "macopa",
-      "price": 19200.5,
-      "thumbnail": "link44"
-    },
-    {
-      "id": 3,
-      "name": "macopa",
-      "price": 19200.5,
-      "thumbnail": "link44"
+      "name": "Macbook",
+      "price": "2340.30",
+      "thumbnail": "link1"
     }
   ],
-  "id": 3
+  "id": 2,
+  "_locals": {}
 }
