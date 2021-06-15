@@ -2,15 +2,15 @@
   "productos": [
     {
       "id": 1,
-      "name": "Macbook",
+      "name": "Apple",
       "price": "2340.30",
-      "thumbnail": "link1"
+      "thumbnail": "link"
     },
     {
       "id": 2,
-      "name": "Macbook",
+      "name": "Apple",
       "price": "2340.30",
-      "thumbnail": "link1"
+      "thumbnail": "link"
     }
   ],
   "id": 2,

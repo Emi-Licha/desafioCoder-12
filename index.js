@@ -30,7 +30,7 @@ router.get('/productos/listar', (req, res) => {
 
 router.get('/productos/vista', (req, res) => {
     
-    res.render('main.pug', productos);
+    res.render('main.ejs', productos);
 })
 
 router.post('/productos', (req, res) => {
@@ -80,7 +80,7 @@ router.put('/productos/actualizar/:id', (req,res) => {
 })
 
 app.set('views','./views/partials')
-app.set('view engine','pug')
+app.set('view engine','ejs')
 
 app.listen(puerto, ()=>{
     console.log(`El servidor esta escuchando en puerto ${puerto}`)
