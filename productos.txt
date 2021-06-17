@@ -5,14 +5,7 @@
       "name": "Apple",
       "price": "2340.30",
       "thumbnail": "link"
-    },
-    {
-      "id": 2,
-      "name": "Apple",
-      "price": "2340.30",
-      "thumbnail": "link"
     }
   ],
-  "id": 2,
-  "_locals": {}
+  "id": 1
 }

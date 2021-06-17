@@ -4,9 +4,8 @@ class Productos {
         this.id = 0
     }
 
-    listar(id) {
-        let prod = this.productos.find(prod => prod.id == id)
-        return prod || {error : 'producto no encontrado'}
+    listar() {
+        return this.productos;
     }
 
     listarAll() {

@@ -1,18 +1,36 @@
 import express from 'express';
 const app = express();
 import fs from 'fs';
-import pug from 'pug';
+import handlebars from 'express-handlebars';
 const puerto = 8080;
 const ruta = "./productos.txt";
 import Productos from './api/productos.js';
+import http from 'http';
+import {Server as Socket} from 'socket.io'
+const server = http.Server(app)
+const io = new Socket(server)
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static('public'));
 const router = express.Router();
 app.use('/api', router);
+app.engine("hbs", handlebars({
+    extname: ".hbs",
+    defaultLayout: "index.hbs"
+}));
 
 let productos = new Productos;
 
+io.on('connection', async socket => {
+    console.log('Nuevo cliente conectado!');
+    /* Envio los mensajes al cliente que se conectó */
+    socket.emit('productos', productos.listar());
+
+    /* Escucho los mensajes enviado por el cliente y se los propago a todos */
+    socket.on('update', data => {
+        io.sockets.emit('productos', productos.listar());
+    });
+});
 
 router.get('/productos/listar', (req, res) => {
 
@@ -29,26 +47,20 @@ router.get('/productos/listar', (req, res) => {
 });
 
 router.get('/productos/vista', (req, res) => {
-    
-    res.render('main.ejs', productos);
+    let prods = productos.listar();
+    res.render('lista', { productos: prods, hayProductos: prods.length });
 })
 
 router.post('/productos', (req, res) => {
-    let { name, price, thumbnail} = req.body
-    let id = productos.length + 1;
-    let producto = {
-        id,
-        name,
-        price,
-        thumbnail
-       
-    }
+   
     
-    productos.guardar(producto)
+    let producto = req.body;
+    
+    
     let data = JSON.stringify(productos,null,2);
     fs.writeFileSync(ruta, data, 'utf-8')
     
-    res.send(producto)
+    res.json(productos.guardar(producto))
 })
 
 router.get('/productos/listar/:id', (req,res) =>{
@@ -79,9 +91,9 @@ router.put('/productos/actualizar/:id', (req,res) => {
     res.json(producto)
 })
 
-app.set('views','./views/partials')
-app.set('view engine','ejs')
+app.set('views','./views')
+app.set('view engine','hbs')
 
-app.listen(puerto, ()=>{
+server.listen(puerto, ()=>{
     console.log(`El servidor esta escuchando en puerto ${puerto}`)
 })
