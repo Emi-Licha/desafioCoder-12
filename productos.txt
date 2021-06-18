@@ -1,10 +1,10 @@
 {
   "productos": [
     {
-      "id": 1,
-      "name": "Apple",
-      "price": "2340.30",
-      "thumbnail": "link"
+      "name": "Ray",
+      "price": "1550",
+      "thumbnail": "https://cdn3.iconfinder.com/data/icons/tiny-weather-1/512/flash-128.png",
+      "id": 1
     }
   ],
   "id": 1

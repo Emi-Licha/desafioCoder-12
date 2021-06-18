@@ -51,7 +51,7 @@ router.get('/productos/vista', (req, res) => {
     res.render('lista', { productos: prods, hayProductos: prods.length });
 })
 
-router.post('/productos', (req, res) => {
+router.post('/productos/guardar', (req, res) => {
    
     
     let producto = req.body;

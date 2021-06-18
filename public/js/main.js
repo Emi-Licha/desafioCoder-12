@@ -11,7 +11,7 @@ const form = document.querySelector('form');
 
 form.addEventListener('submit', event => {
     event.preventDefault();
-    const data = { title: form[0].value, price: form[1].value, thumbnail: form[2].value };
+    const data = { name: form[0].value, price: form[1].value, thumbnail: form[2].value };
 
     fetch('/api/productos/guardar', {
         headers: {
@@ -20,7 +20,7 @@ form.addEventListener('submit', event => {
         method: 'POST',
         body: JSON.stringify(data)
     })
-    .then(respuesta => respuesta.json())
+    .then(respuesta => JSON.stringify(respuesta.json()))
     .then(productos => {
         form.reset();
         socket.emit('update', 'ok');
@@ -42,13 +42,15 @@ function data2TableHBS(productos) {
         <div class="table-responsive">
             <table class="table table-dark">
                 <tr>
+                    <th>#</th>
                     <th>Nombre</th>
                     <th>Precio</th>
                     <th>Foto</th>
                 </tr>
                 {{#each productos}}
                 <tr>
-                    <td>{{this.title}}</td>
+                    <td>{{this.id}}</td>
+                    <td>{{this.name}}</td>
                     <td>$ {{ this.price }}</td>
                     <td><img width="50" src={{this.thumbnail}} alt="not found"></td>
                 </tr>
